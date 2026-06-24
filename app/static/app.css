@@ -47,12 +47,14 @@ select,input{font-size:13px}
   #view .grid.grid-cols-2{grid-template-columns:1fr !important}
   /* charts/panels that spanned 2 cols go full width */
   #view .col-span-2{grid-column:auto !important}
-  /* tables scroll horizontally instead of overflowing */
-  #view table.tbl{min-width:560px}
-  #view .card{overflow-x:auto}
+  /* tables: horizontal-scroll inside the card, no awkward wrapping */
+  #view .card{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #view table.tbl{min-width:520px}
+  #view table.tbl td,#view table.tbl th{white-space:nowrap}
   .kpi-num{font-size:1.4rem}
-  /* warehouse map: keep bins tappable but compact */
-  .wh-bin{font-size:8px}
+  /* warehouse map: bins stay tappable (min 34px); grid scrolls if too wide */
+  .wh-grid{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .wh-bin{font-size:9px;min-width:34px;min-height:34px;aspect-ratio:auto;height:34px}
 }
 /* make tables in cards scrollable on any narrow container */
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}

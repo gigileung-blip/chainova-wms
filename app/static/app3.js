@@ -71,7 +71,7 @@ window.runPickPath = async () => {
             :`<div class="wh-bin z-empty" style="grid-column:${x+1};grid-row:${y+1}"></div>`;
   }
   $('#ppMap').innerHTML = card(`<div class="text-xs text-slate-500 mb-2">${t('pp.legend')}</div>
-    <div class="wh-grid" style="grid-template-columns:repeat(${maxX},1fr)">${cells}</div>`);
+    <div class="wh-grid" style="grid-template-columns:repeat(${maxX},minmax(34px,1fr))">${cells}</div>`);
   $('#ppStats').innerHTML = card(`
     <div class="text-sm font-semibold mb-3">${t('pp.result')}</div>
     <div class="space-y-3">

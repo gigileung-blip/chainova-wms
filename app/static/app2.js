@@ -28,7 +28,7 @@ async function renderWarehouseArea(area){
     <div class="grid grid-cols-3 gap-4">
       <div class="col-span-2">${card(`
         <div class="flex gap-3 text-xs mb-3 flex-wrap">${legend}</div>
-        <div class="wh-grid" style="grid-template-columns:repeat(${cols},1fr)">${cells}</div>`)}</div>
+        <div class="wh-grid" style="grid-template-columns:repeat(${cols},minmax(34px,1fr))">${cells}</div>`)}</div>
       <div id="binInfo">${card(`<div class="text-sm text-slate-400">${t('wh.click')}</div>`)}</div>
     </div>`;
   document.querySelectorAll('.wh-bin[data-bin]').forEach(el=>el.onclick=()=>{
