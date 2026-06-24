@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Chainova WMS — First Honor / 信海</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config = { theme: { extend: { colors: {
+  brand: { 50:'#eef4ff', 500:'#2563eb', 600:'#1d4ed8', 700:'#1e40af', 900:'#0f1e3d' },
+  ink: '#0b1424'
+}}}}
+</script>
+<link rel="stylesheet" href="/static/app.css"/>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+<!-- ===== LOGIN SPLASH ===== -->
+<div id="login" class="hidden min-h-screen flex items-center justify-center px-6"
+     style="background:radial-gradient(circle at 50% 30%, #11214a 0%, #0b1424 70%)">
+  <div class="absolute top-6 right-8 flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchLogin">
+    <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
+    <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
+    <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+  </div>
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="text-white font-bold text-3xl tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
+      <div class="text-slate-400 text-sm mt-2" data-i18n="login.title">WMS</div>
+      <div class="text-slate-500 text-xs mt-1" data-i18n="brand.sub">First Honor</div>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur">
+      <label class="block text-xs text-slate-400 mb-1" data-i18n="login.user">Username</label>
+      <input id="loginUser" autocomplete="username" class="w-full mb-4 px-3 py-2.5 rounded-lg bg-white/10 text-white border border-white/15 outline-none focus:border-brand-500" value="admin"/>
+      <label class="block text-xs text-slate-400 mb-1" data-i18n="login.pass">Password</label>
+      <input id="loginPass" type="password" autocomplete="current-password" class="w-full mb-2 px-3 py-2.5 rounded-lg bg-white/10 text-white border border-white/15 outline-none focus:border-brand-500" value="admin"/>
+      <p id="loginErr" class="text-red-400 text-xs mb-3 hidden" data-i18n="login.err">Incorrect</p>
+      <button id="loginBtn" class="w-full py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold mt-2" data-i18n="login.btn">Sign In</button>
+      <p class="text-center text-slate-500 text-xs mt-4" data-i18n="login.hint">Demo login: admin / admin</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HOME / BUSINESS-LINE LAUNCHER ===== -->
+<div id="home" class="hidden min-h-screen flex flex-col items-center justify-center px-6"
+     style="background:radial-gradient(circle at 50% 30%, #11214a 0%, #0b1424 70%)">
+  <div class="absolute top-6 right-8 flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchHome">
+    <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
+    <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
+    <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+  </div>
+  <div class="text-center mb-2">
+    <div class="text-white font-bold text-3xl tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
+    <div class="text-slate-400 text-sm mt-2" data-i18n="brand.sub">First Honor</div>
+  </div>
+  <h2 class="text-white/90 text-xl mt-6 mb-1" data-i18n="home.welcome">Welcome</h2>
+  <p class="text-slate-400 text-sm mb-8" data-i18n="home.choose">Select a business line</p>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6 w-full max-w-4xl" id="bizButtons"></div>
+</div>
+
+<!-- ===== WORKSPACE (after selecting a business line) ===== -->
+<div id="workspace" class="hidden min-h-screen">
+  <!-- mobile overlay -->
+  <div id="navOverlay" class="hidden fixed inset-0 bg-black/50 z-30 md:hidden"></div>
+  <aside id="sidebar" class="w-60 bg-ink text-slate-300 flex flex-col fixed h-full z-40 transition-transform duration-200 -translate-x-full md:translate-x-0">
+    <div class="px-5 py-5 border-b border-white/10">
+      <div class="text-white font-bold text-lg tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
+      <div id="modeBadge" class="mt-2 inline-block px-2 py-0.5 rounded text-[11px] font-semibold"></div>
+    </div>
+    <nav class="flex-1 py-3 text-sm overflow-y-auto" id="nav"></nav>
+    <div class="px-5 py-3 border-t border-white/10">
+      <button id="switchBiz" class="w-full text-left text-xs text-slate-400 hover:text-white py-1" data-i18n="mode.switch">⇄ Switch Business</button>
+      <button id="logoutBtn" class="w-full text-left text-xs text-slate-500 hover:text-white py-1" data-i18n="login.logout">Sign Out</button>
+      <div class="text-[11px] text-slate-600 mt-2"><span data-i18n="foot.build">Demo</span></div>
+    </div>
+  </aside>
+
+  <main class="flex-1 md:ml-60">
+    <header class="bg-white border-b px-4 md:px-8 py-3 md:py-4 flex items-center justify-between sticky top-0 z-20 gap-2">
+      <div class="flex items-center gap-3 min-w-0">
+        <button id="navToggle" class="md:hidden text-2xl text-ink shrink-0" aria-label="Menu">☰</button>
+        <div class="min-w-0">
+          <h1 id="pageTitle" class="text-base md:text-xl font-semibold text-ink truncate"></h1>
+          <p id="pageSub" class="text-[11px] md:text-xs text-slate-500 truncate"></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 md:gap-3 text-sm shrink-0">
+        <div class="flex rounded-lg overflow-hidden border text-xs font-semibold" id="langSwitch">
+          <button data-lang-btn="tc" class="px-2.5 md:px-3 py-1.5">繁</button>
+          <button data-lang-btn="sc" class="px-2.5 md:px-3 py-1.5 border-l">简</button>
+          <button data-lang-btn="en" class="px-2.5 md:px-3 py-1.5 border-l">EN</button>
+        </div>
+        <span class="hidden sm:inline px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium" data-i18n="hdr.live">● Live</span>
+        <span class="hidden lg:inline text-slate-400 text-xs">23 Jun 2026</span>
+        <div class="w-8 h-8 rounded-full bg-brand-600 text-white grid place-items-center text-xs font-bold shrink-0">FH</div>
+      </div>
+    </header>
+    <div id="view" class="p-4 md:p-8"></div>
+  </main>
+</div>
+
+<script src="/static/i18n.js"></script>
+<script src="/static/i18n2.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/app2.js"></script>
+<script src="/static/app3.js"></script>
+<script src="/static/app4.js"></script>
+<script>
+  document.querySelectorAll('[data-lang-btn]').forEach(b=>b.onclick=()=>setLang(b.dataset.langBtn));
+  boot();
+</script>
+</body>
+</html>

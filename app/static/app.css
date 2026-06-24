@@ -1,0 +1,58 @@
+.nav-link{display:block;padding:9px 20px;cursor:pointer;border-left:3px solid transparent;transition:.15s}
+.nav-link:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav-link.active{background:rgba(37,99,235,.15);color:#fff;border-left-color:#2563eb}
+.card{background:#fff;border-radius:12px;border:1px solid #e8edf3;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.kpi-num{font-size:1.7rem;font-weight:700;line-height:1.1}
+table.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;padding:9px 12px;background:#f8fafc;color:#64748b;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e8edf3}
+.tbl td{padding:9px 12px;border-bottom:1px solid #f1f5f9}
+.tbl tbody tr:hover{background:#f8fafc}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600}
+.b-b2b{background:#eff6ff;color:#1d4ed8}.b-b2c{background:#fef3f2;color:#c026d3}
+.b-new{background:#f1f5f9;color:#475569}.b-pick{background:#fef9c3;color:#a16207}
+.b-ship{background:#dcfce7;color:#15803d}.b-pack{background:#e0f2fe;color:#0369a1}
+.b-warn{background:#fee2e2;color:#b91c1c}
+/* warehouse grid */
+.wh-grid{display:grid;gap:4px}
+.wh-bin{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;position:relative;transition:.1s}
+.wh-bin:hover{transform:scale(1.12);z-index:5;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.z-storage{background:#e2e8f0;color:#475569}
+.z-golden{background:#fde68a;color:#92400e}
+.z-cfs{background:#bfdbfe;color:#1e40af}
+.z-empty{background:#f8fafc;color:#cbd5e1}
+.wh-despatch{background:#1d4ed8;color:#fff}
+.route-stop{background:#22c55e !important;color:#fff !important;box-shadow:0 0 0 2px #16a34a}
+.btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none}
+.btn-pri{background:#1d4ed8;color:#fff}.btn-pri:hover{background:#1e40af}
+.btn-ghost{background:#f1f5f9;color:#334155}
+select,input{font-size:13px}
+#langSwitch button{background:#fff;color:#64748b}
+#langSwitch button.lang-on{background:#1d4ed8;color:#fff}
+#langSwitchHome button{background:transparent;color:#94a3b8}
+#langSwitchHome button.lang-on{background:#2563eb;color:#fff}
+.biz-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  padding:38px 18px;cursor:pointer;transition:.18s;text-align:center}
+.biz-tile:hover{background:rgba(255,255,255,.08);transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,.35);outline:2px solid;outline-offset:0}
+.biz-enter{display:inline-block;margin-top:4px;padding:8px 20px;border-radius:9px;
+  background:#1d4ed8;color:#fff;font-weight:600;font-size:14px}
+.biz-tile:hover .biz-enter{background:#2563eb}
+
+/* ---- mobile responsiveness ---- */
+@media (max-width: 767px){
+  /* collapse fixed multi-column grids on phones */
+  #view .grid.grid-cols-4{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  #view .grid.grid-cols-3{grid-template-columns:1fr !important}
+  #view .grid.grid-cols-2{grid-template-columns:1fr !important}
+  /* charts/panels that spanned 2 cols go full width */
+  #view .col-span-2{grid-column:auto !important}
+  /* tables scroll horizontally instead of overflowing */
+  #view table.tbl{min-width:560px}
+  #view .card{overflow-x:auto}
+  .kpi-num{font-size:1.4rem}
+  /* warehouse map: keep bins tappable but compact */
+  .wh-bin{font-size:8px}
+}
+/* make tables in cards scrollable on any narrow container */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}

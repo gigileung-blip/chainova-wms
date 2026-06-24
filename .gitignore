@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+app/wms.db
+cloudflared
+cloudflared.tgz
+.DS_Store

@@ -1,0 +1,11 @@
+# Render deployment config for Chainova WMS
+services:
+  - type: web
+    name: chainova-wms
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python init_data.py"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
