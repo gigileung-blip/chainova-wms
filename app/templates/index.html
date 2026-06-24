@@ -17,14 +17,17 @@ tailwind.config = { theme: { extend: { colors: {
 <body class="bg-slate-100 text-slate-800">
 
 <!-- ===== LOGIN SPLASH ===== -->
-<div id="login" class="hidden min-h-screen flex items-center justify-center px-6"
+<div id="login" class="hidden min-h-screen flex flex-col px-6"
      style="background:radial-gradient(circle at 50% 30%, #11214a 0%, #0b1424 70%)">
-  <div class="absolute top-6 right-8 flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchLogin">
-    <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
-    <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
-    <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+  <div class="flex justify-end pt-5">
+    <div class="flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchLogin">
+      <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
+      <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
+      <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+    </div>
   </div>
-  <div class="w-full max-w-sm">
+  <div class="flex-1 flex items-center justify-center pb-16">
+   <div class="w-full max-w-sm">
     <div class="text-center mb-8">
       <div class="text-white font-bold text-3xl tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
       <div class="text-slate-400 text-sm mt-2" data-i18n="login.title">WMS</div>
@@ -39,24 +42,29 @@ tailwind.config = { theme: { extend: { colors: {
       <button id="loginBtn" class="w-full py-2.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold mt-2" data-i18n="login.btn">Sign In</button>
       <p class="text-center text-slate-500 text-xs mt-4" data-i18n="login.hint">Demo login: admin / admin</p>
     </div>
+   </div>
   </div>
 </div>
 
 <!-- ===== HOME / BUSINESS-LINE LAUNCHER ===== -->
-<div id="home" class="hidden min-h-screen flex flex-col items-center justify-center px-6"
+<div id="home" class="hidden min-h-screen flex flex-col px-6"
      style="background:radial-gradient(circle at 50% 30%, #11214a 0%, #0b1424 70%)">
-  <div class="absolute top-6 right-8 flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchHome">
-    <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
-    <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
-    <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+  <div class="flex justify-end pt-5">
+    <div class="flex rounded-lg overflow-hidden border border-white/20 text-xs font-semibold" id="langSwitchHome">
+      <button data-lang-btn="tc" class="px-3 py-1.5">繁</button>
+      <button data-lang-btn="sc" class="px-3 py-1.5 border-l border-white/20">简</button>
+      <button data-lang-btn="en" class="px-3 py-1.5 border-l border-white/20">EN</button>
+    </div>
   </div>
-  <div class="text-center mb-2">
-    <div class="text-white font-bold text-3xl tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
-    <div class="text-slate-400 text-sm mt-2" data-i18n="brand.sub">First Honor</div>
+  <div class="flex-1 flex flex-col items-center justify-center pb-12">
+    <div class="text-center mb-2">
+      <div class="text-white font-bold text-3xl tracking-tight">CHAINOVA<span class="text-brand-500">·</span>WMS</div>
+      <div class="text-slate-400 text-sm mt-2" data-i18n="brand.sub">First Honor</div>
+    </div>
+    <h2 class="text-white/90 text-xl mt-6 mb-1 text-center" data-i18n="home.welcome">Welcome</h2>
+    <p class="text-slate-400 text-sm mb-8 text-center" data-i18n="home.choose">Select a business line</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6 w-full max-w-4xl" id="bizButtons"></div>
   </div>
-  <h2 class="text-white/90 text-xl mt-6 mb-1" data-i18n="home.welcome">Welcome</h2>
-  <p class="text-slate-400 text-sm mb-8" data-i18n="home.choose">Select a business line</p>
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6 w-full max-w-4xl" id="bizButtons"></div>
 </div>
 
 <!-- ===== WORKSPACE (after selecting a business line) ===== -->
